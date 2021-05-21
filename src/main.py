@@ -90,12 +90,31 @@ tmp_lines = cv2.HoughLines(edges,1,np.pi/180,200)
 lines = get_lines(im, tmp_lines, orientation)
 """
 # image set
-imset = ["../Dataset/"+file for file in os.listdir("../Dataset/")]
-test_im = cv2.imread(imset[3])
+imset = ["../Dataset/train/"+file for file in os.listdir("../Dataset/train/")]
+
+test_im = cv2.imread(imset[2])
 # resizing the image for testing to half of its size
 test_im = cv2.resize(test_im,(int(test_im.shape[0]/2), int(test_im.shape[1]/2)))
+# T,thresholded_im = cv2.threshold(cv2.cvtColor(test_im,cv2.COLOR_BGR2GRAY),200, 255, cv2.THRESH_BINARY)
+# cv2.imshow("thresh_im",thresholded_im)
+# cv2.waitKey(0)
 # Now we have to apply hough transform to obtain the lines of the image
-lines = np.array(get_lines(test_im))
+lines = get_lines(test_im)
+vp = get_vanishing_point(lines)
+print("vanishing point", vp)
+"""
+
+detected = 0
+for im in imset:
+    test_im = cv2.imread(im)
+    # resizing the image for testing to half of its size
+    test_im = cv2.resize(test_im,(int(test_im.shape[0]/2), int(test_im.shape[1]/2)))
+    # Now we have to apply hough transform to obtain the lines of the image
+    lines = get_lines(test_im)
+    detected = detected+1 if len(lines) > 1 else detected
+
+print("accuracy: ", detected/len(imset))
+"""
 
 # to watch what lines we have found let's draw them in our test image and show them
 im = draw_lines(test_im,lines)
