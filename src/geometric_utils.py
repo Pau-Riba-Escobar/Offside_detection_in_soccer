@@ -78,6 +78,16 @@ def get_vanishing_point(lines):
                 # if the point is not in intersections
                 if np.array(intersections == p).any() == False:
                     intersections.append(p)
-    print(intersections)
     return np.mean(intersections,axis=0)
 
+def test_lines(imset):
+    detected = 0
+    for im in imset:
+        test_im = cv2.imread(im)
+        # resizing the image for testing to half of its size
+        test_im = cv2.resize(test_im,(int(test_im.shape[0]/2), int(test_im.shape[1]/2)))
+        # Now we have to apply hough transform to obtain the lines of the image
+        lines = get_lines(test_im)
+        detected = detected+1 if len(lines) > 1 else detected
+
+    print("accuracy: ", detected/len(imset))
