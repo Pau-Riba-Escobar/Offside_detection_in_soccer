@@ -18,7 +18,7 @@ vp = get_vanishing_point(lines)
 
 # to watch what lines we have found let's draw them in our test image and show them
 # im = draw_lines(test_im,lines) UNCOMMENT TO SEE THE LINES IN THE IMAGE
-extract_players(test_im)
-
+thr = extract_players(test_im)
+show_contours(test_im.copy(),thr)
 
 
