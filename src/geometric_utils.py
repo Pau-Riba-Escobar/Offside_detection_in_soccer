@@ -80,9 +80,4 @@ def get_vanishing_point(lines):
                     intersections.append(p)
     print(intersections)
     return np.mean(intersections,axis=0)
-    """
-    vanishing_points = []
-    for line1 in lines:
-        for line2 in lines:
-            if line1 != line2:"""
 
