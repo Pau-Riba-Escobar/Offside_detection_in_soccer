@@ -8,7 +8,7 @@ from segmentation_utils import *
 # image set
 imset = ["DataSet/Train/"+file for file in os.listdir("DataSet/Train/")]
 
-test_im = cv2.imread(imset[0])
+test_im = cv2.imread(imset[8])
 # resizing the image for testing to half of its size
 test_im = cv2.resize(test_im,(int(test_im.shape[0]/2), int(test_im.shape[1]/2)))
 # Now we have to apply hough transform to obtain the lines of the image
