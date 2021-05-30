@@ -6,8 +6,9 @@ def draw_lines(im, lines):
     for l in lines:
         r,t = l[0]
         p1,p2 = hough_to_projective(r,t)
-        cv2.line(im,p1[0:2],p2[0:2],(255,0,0),1)
-    return im
+        cv2.line(im,p1[0:2],p2[0:2],(255,0,0),2)
+    cv2.imshow("lines", im)
+    cv2.waitKey(0)
 
 def hough_to_projective(ro,theta):
     # sinus y cosinus
